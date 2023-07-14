@@ -1,22 +1,27 @@
 import flet as ft
-import os
 import sys
+
 def main(page: ft.Page):
     page.title = "Xrun"#软件标题
     #主界面配置
     rail = ft.NavigationRail(
         selected_index=0,
         label_type=ft.NavigationRailLabelType.ALL,
-        # extended=True,
         min_width=100,
         min_extended_width=400,
-        leading=ft.FloatingActionButton(icon=ft.icons.CREATE, text="安装"),
         group_alignment=-0.9,
         destinations=[
+            #安装选项
             ft.NavigationRailDestination(
-                icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.FAVORITE, label="功能"
+                icon=ft.icons.INSTALL_DESKTOP, selected_icon=ft.icons.INSTALL_DESKTOP, label="安装"
             ),
 
+            #功能选项
+            ft.NavigationRailDestination(
+                icon=ft.icons.TIPS_AND_UPDATES, selected_icon=ft.icons.TIPS_AND_UPDATES, label="功能"
+            ),
+
+            #设置选项
             ft.NavigationRailDestination(
                 icon=ft.icons.SETTINGS_OUTLINED,
                 selected_icon_content=ft.Icon(ft.icons.SETTINGS),
@@ -35,14 +40,13 @@ def main(page: ft.Page):
             "Oops, 您使用的不是Linux系统。无法使用该应用。"
         ),
         actions=[
-            ft.TextButton("退出",on_click=exit1),
+            ft.TextButton("退出"),
         ],
     )
     #判断系统是否为Linux系统
-    if os.name != 'posix':
+    if sys.platform != 'linux':
         page.banner.open = True
         page.update()
-
 
 
     page.add(
