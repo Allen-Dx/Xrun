@@ -27,6 +27,7 @@ deploy:
 #
 #   Linux package
 #
+for:
 -
   matrix:
     only:
